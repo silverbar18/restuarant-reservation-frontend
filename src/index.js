@@ -1,3 +1,8 @@
+/*
+ 1. Open terminal in visual studio code.
+ 2. Type "npm run start" to start development server.
+ I recommend downloading firefox developer edition to debug html and css.
+*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
