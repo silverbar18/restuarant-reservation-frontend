@@ -8,10 +8,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import HomePage from './components/homePage';
+import Signup from './components/Signup';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Signup />
   </React.StrictMode>,
   document.getElementById('root')
 );
