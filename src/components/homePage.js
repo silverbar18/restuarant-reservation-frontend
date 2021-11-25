@@ -18,6 +18,7 @@ function AvailableTables(){
 
 function HomePage() {
   return (
+      
     <Container>
         <Row>
             <Col>
