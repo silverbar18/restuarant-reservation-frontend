@@ -48,7 +48,7 @@ class App extends Component {
           <hr></hr>
           <center style={{height: "40px"}}>
             <Link to="/" style={{color: "black"}}>home</Link>
-          </center>
+          </center> //testing commit
         </footer> */}
       </Router>
     );
