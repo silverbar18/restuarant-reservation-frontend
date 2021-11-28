@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import HomePage from "./components/HomePage";
 import Signup from "./components/Signup";
-import { Link, Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { Component } from "react";
 import history from "./history";
@@ -11,7 +11,7 @@ import Header from "./components/Header"
 
 //const store = makeStore();
 // Check for token to keep user logged in
-if (localStorage.jwtToken != undefined) {
+if (localStorage.jwtToken !== undefined) {
   console.log("token founded: ", localStorage.jwtToken);
   // Set auth token header auth
   const token = localStorage.jwtToken;
@@ -23,7 +23,7 @@ if (localStorage.jwtToken != undefined) {
   //store.dispatch(setCurrentUser(decoded));
   // Check for expired token
   console.log(decoded.exp);
-  const currentTime = Date.now() / 1000; // to get in milliseconds
+  //const currentTime = Date.now() / 1000; // to get in milliseconds
   //if (decoded.exp < currentTime) {
     // Logout user
     //store.dispatch(logoutUser());

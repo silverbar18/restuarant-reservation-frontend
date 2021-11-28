@@ -13,6 +13,7 @@ export default function DateSelection() {
         label="Select Date"
         value={value}
         onChange={(newValue) => {
+          console.log(newValue)
           setValue(newValue);
         }}
         renderInput={(params) => <TextField {...params} />}

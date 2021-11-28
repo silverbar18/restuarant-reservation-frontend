@@ -46,7 +46,10 @@ class Signup extends Component {
     }
     axios
     .post("http://localhost:8000/signup", userData)
-    .then(res => console.log(res)) //
+    .then(res => {
+        console.log(res)
+        
+    }) //
     .catch(err =>
       console.log(err)
     );

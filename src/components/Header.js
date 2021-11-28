@@ -1,15 +1,9 @@
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 //import Login from "./Login";
 import {
-  Collapse,
   Navbar,
-  NavbarBrand,
   Nav,
-  NavDropdown,
-  NavItem,
-  NavLink,
   Container,
 } from "react-bootstrap";
 class Header extends Component {
