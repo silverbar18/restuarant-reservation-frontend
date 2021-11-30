@@ -64,7 +64,13 @@ function convertResponse(tablesTaken) {
   return stringArray;
 }
 
-function getTakenTables() {
+function convertTime(timee){
+  if(parseInt(timee.substring(0,2)) > 12){
+    return "pm"
+  }
+}
+
+function getTakenTables(date, time) {
   var tablesAvailable = [];
   const parameters = {
     params: {
@@ -82,7 +88,7 @@ function getTakenTables() {
         // go through array of tables and remove taken tables
         tablesAvailable = tablesAvailable.filter((ta) => ta !== tablesTaken[i]);
       }
-
+      console.log(tablesAvailable)
       return tablesAvailable;
     })
     .catch((err) => {
@@ -90,21 +96,47 @@ function getTakenTables() {
     });
 }
 
-async function AvailableTables() {
-  const takenTables = getTakenTables();
-  console.log(takenTables);
-  return <div>d</div>;
-}
 
 function HomePage() {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const getDate = (date) => {
-    console.log(date.getDate());
-    return "d";
-  };
+
+  const [datee, setDatee] = useState(null);
+  const [timee, setTimee] = useState(null);
+
+  function getTableList(d, t){
+    var tablesAvailable = []
+    const parameters = {
+      params: {
+        date: d.value,
+        time: t.value,
+      },
+    }; 
+    if(t.value.length != 0){
+      console.log(parameters)
+    axios
+      .get("http://localhost:8000/getAvailableTables", parameters)
+      .then((res) => {
+        tablesAvailable = arrayOfTables;
+        console.log(res.data.reservation)
+        tablesTaken = res.data.reservation;
+        var tablesTaken = convertResponse(tablesTaken);
+        for (var i = 0; i < tablesTaken.length; i++) {
+          // go through array of tables and remove taken tables
+          tablesAvailable = tablesAvailable.filter((ta) => ta !== tablesTaken[i]);
+        }
+        console.log(tablesAvailable)
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+    }
+  }
+
+  function getDate(){
+    return document.getElementsByName("dateValue")[0].value;
+  }
+
   return (
     <Container>
       <Row>
@@ -114,11 +146,10 @@ function HomePage() {
               label="Select Date"
               value={date}
               onChange={(newValue) => {
-                console.log(newValue);
                 setDate(newValue);
                 //setSelectedDate(getDate(date))
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField name={"dateValue"} {...params} />}
             />
           </LocalizationProvider>
         </Col>
@@ -130,25 +161,24 @@ function HomePage() {
               minutesStep={15}
               onChange={(newValue) => {
                 setTime(newValue);
-                console.log(time);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField name={'timeValue'} {...params} />}
             />
           </LocalizationProvider>
         </Col>
       </Row>
       <Row>
         <Col>
-          <p>Selected Date: {date != null ? date.toDateString() : ""}</p>
+          <p>Selected Date: {}</p>
           <p>
             Selected Time:{" "}
-            {time != null ? time.toTimeString().substring(0, 5) : "lol"}
+            {time != null ? document.getElementsByName("timeValue")[0].value : "lol"}
           </p>
         </Col>
       </Row>
       <Row>
         <Col>
-              
+              {date != null && time != null ? getTableList(document.getElementsByName("dateValue")[0], document.getElementsByName("timeValue")[0]) : "not null"}
         </Col>
       </Row>
     </Container>
